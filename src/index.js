@@ -48,15 +48,17 @@ function getToys() {
 
 toyForm.addEventListener('submit', (e) => {
   e.preventDefault()
+  const toyName = toyForm.elements['name'].value
+  const toyURL = toyForm.elements['image'].value
   fetch('http://localhost:3000/toys', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       id: 0,
-      name: 'Buzz Lightyear',
+      name: toyName,
       image:
-        'http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png',
-      likes: 8,
+        toyURL,
+      likes: 0,
     }),
   })
   getToys()

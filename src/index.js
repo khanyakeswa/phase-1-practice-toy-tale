@@ -28,7 +28,7 @@ function getToys() {
 
         const toyName = document.createElement('h2')
         toyName.innerText = toy.name
-        
+
         const toyImage = document.createElement('img')
         toyImage.classList.add('toy-avatar')
         toyImage.src = toy.image
@@ -46,8 +46,20 @@ function getToys() {
     })
 }
 
-toyForm.addEventListener('submit', () => {
-  
+toyForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+  fetch('http://localhost:3000/toys', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      id: 0,
+      name: 'Buzz Lightyear',
+      image:
+        'http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png',
+      likes: 8,
+    }),
+  })
+  getToys()
 })
 
 getToys()

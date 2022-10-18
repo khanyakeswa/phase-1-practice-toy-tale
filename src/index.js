@@ -17,6 +17,7 @@ addBtn.addEventListener('click', () => {
 })
 
 function createCard(toy) {
+  console.log(toy)
   const toyCard = document.createElement('div')
   toyCard.classList.add('card')
 
@@ -32,10 +33,25 @@ function createCard(toy) {
 
   const likeButton = document.createElement('button')
   likeButton.innerText = 'like'
+  likeButton.addEventListener('click', () => {
+    console.log('liked')
+    toy.likes++
+    updateLikes(toy)
+    toyLikes.innerText = `Likes: ${toy.likes}`
+  })
 
   toyCard.append(toyName, toyImage, toyLikes, likeButton)
 
   toyCollection.appendChild(toyCard)
+}
+
+function updateLikes(toy) {
+  fetch(`http://localhost:3000/toys/${toy.id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(toy),
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data))
 }
 
 function getToys() {
@@ -43,7 +59,6 @@ function getToys() {
     .then((res) => res.json())
     .then((toys) => {
       console.log(toys)
-
       toys.forEach(createCard)
     })
 }

@@ -16,8 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  function createCard(toy) {
+  function createCard(toy) { // create a function that creates a card from toy data and  puts it in the DOM
     console.log(toy)
+
+    // create the container for the toy data and set its class to 'card' so that CSS can style it
     const toyCard = document.createElement('div')
     toyCard.classList.add('card')
 
